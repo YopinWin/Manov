@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/about', function () {
-    return view('about');
+    return view('sync-features.about');
 });
 
 // 4. SISTEM AUTH (Login, Register, Logout, dll)
