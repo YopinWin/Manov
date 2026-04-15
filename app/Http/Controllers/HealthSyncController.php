@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\DailyHealthLog;
+use App\Models\AcademicLog;
+use App\Models\DataRecap;
 use Carbon\Carbon;
 
 class HealthSyncController extends Controller
@@ -26,11 +28,18 @@ class HealthSyncController extends Controller
         // Data default untuk Meal Recommendation awal (berdasarkan waktu sekarang)
         $mealPlan = $this->generateMealRecommendations('senang', 0);
 
+        // Ambil Data Recap Terakhir
+        $lastRecap = DataRecap::where('user_id', auth()->id() ?? User::first()->id ?? null)->latest()->first();
+        if (!$lastRecap) {
+            $lastRecap = DataRecap::latest()->first(); // Fallback if no specific user auth active
+        }
+
         return view('dashboard', [
             'schedules' => $schedules,
             'recommendations' => $recommendations,
             'mealPlan' => $mealPlan,
-            'healthLog' => $healthLog ?? (object)['water_intake' => 0, 'mood_status' => 'Neutral']
+            'healthLog' => $healthLog ?? (object)['water_intake' => 0, 'mood_status' => 'Neutral'],
+            'lastRecap' => $lastRecap
         ]);
     }
 
@@ -158,5 +167,57 @@ class HealthSyncController extends Controller
     {
         Schedule::destroy($id);
         return redirect()->back()->with('success', 'Jadwal Berhasil Dihapus!');
+    }
+
+    /**
+     * Simpan Data Akademik via AJAX
+     */
+    public function storeAcademic(Request $request)
+    {
+        $request->validate([
+            'quiz_name'   => 'required|string|max:255',
+            'score'       => 'required|integer|min:0|max:100',
+            'sleep_hours' => 'required|numeric|min:0|max:24',
+        ]);
+
+        $log = AcademicLog::create([
+            'user_id'     => auth()->id(),
+            'quiz_name'   => $request->quiz_name,
+            'score'       => $request->score,
+            'sleep_hours' => $request->sleep_hours,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'data' => $log
+        ]);
+    }
+
+    /**
+     * Ambil Data Akademik via AJAX
+     */
+    public function getAcademicData()
+    {
+        $data = AcademicLog::where('user_id', auth()->id())
+            ->orderBy('created_at', 'asc')
+            ->get()
+            ->map(function ($log) {
+                return [
+                    'name' => $log->quiz_name,
+                    'score' => $log->score,
+                    'sleep' => $log->sleep_hours,
+                ];
+            });
+
+        return response()->json($data);
+    }
+
+    /**
+     * Force Recap Data (Manual Trigger for Demo)
+     */
+    public function forceRecap()
+    {
+        \Illuminate\Support\Facades\Artisan::call('hts:recap-reset');
+        return redirect()->back()->with('success', 'Recap & Reset berhasil dijalankan!');
     }
 }

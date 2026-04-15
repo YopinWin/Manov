@@ -7,8 +7,8 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <div class="glow-card bg-white p-8 rounded-[2.5rem] cursor-pointer group transition-all duration-300">
-                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 text-2xl mb-6 group-hover:bg-yellow-400 group-hover:text-white transition-all">
+            <div onclick="showTab('energy', document.querySelectorAll('.tab-btn')[1])" class="glass-card p-8 cursor-pointer group hover:-translate-y-2">
+                <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-500 text-2xl mb-6 group-hover:bg-yellow-400 group-hover:text-white transition-all">
                     <i class="fa-solid fa-calendar-check"></i>
                 </div>
                 <h4 class="font-black text-lg mb-2 tracking-tighter">Sync-Calendar</h4>
@@ -17,7 +17,7 @@
                 </p>
             </div>
 
-            <div class="glow-card bg-white p-8 rounded-[2.5rem] cursor-pointer group transition-all duration-300">
+            <div onclick="showTab('energy', document.querySelectorAll('.tab-btn')[1])" class="glass-card p-8 cursor-pointer group hover:-translate-y-2">
                 <div class="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-500 text-2xl mb-6 group-hover:bg-yellow-400 group-hover:text-white transition-all">
                     <i class="fa-solid fa-bolt"></i>
                 </div>
@@ -25,15 +25,15 @@
                 <p class="text-gray-400 text-[11px] leading-relaxed italic">Sinkronisasi jadwal berat dengan waktu pemulihan energi seluler secara real-time.</p>
             </div>
 
-            <div class="glow-card bg-white p-8 rounded-[2.5rem] cursor-pointer group transition-all duration-300">
-                <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-500 text-2xl mb-6 group-hover:bg-yellow-400 group-hover:text-white transition-all">
+            <div onclick="showTab('mood', document.querySelectorAll('.tab-btn')[2])" class="glass-card p-8 cursor-pointer group hover:-translate-y-2">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-500 text-2xl mb-6 group-hover:bg-yellow-400 group-hover:text-white transition-all">
                     <i class="fa-solid fa-face-smile"></i>
                 </div>
                 <h4 class="font-black text-lg mb-2 tracking-tighter">Mood-Check AI</h4>
                 <p class="text-gray-400 text-[11px] leading-relaxed italic">AI pendeteksi burnout yang memberikan instruksi istirahat tepat sesuai kondisi mental.</p>
             </div>
 
-            <div class="glow-card bg-white p-8 rounded-[2.5rem] cursor-pointer group transition-all duration-300">
+            <div onclick="showTab('meal', document.querySelectorAll('.tab-btn')[3])" class="glass-card p-8 cursor-pointer group hover:-translate-y-2">
                 <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center text-green-500 text-2xl mb-6 group-hover:bg-yellow-400 group-hover:text-white transition-all">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-[3.5rem] p-12 border border-pink-100 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
+    <div class="glass-card p-12 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
         <div class="flex-1 z-10">
             <h3 class="text-4xl font-black mb-8 text-pink-600 italic leading-none">Apa Manfaatnya?</h3>
             <div class="space-y-6">
@@ -68,12 +68,3 @@
         </div>
     </div>
 </div>
-
-<script>
-  var swiper = new Swiper(".mySwiper", {
-    autoplay: { delay: 4000, disableOnInteraction: false },
-    pagination: { el: ".swiper-pagination", clickable: true },
-    loop: true,
-    effect: 'fade', // Menambah kesan smooth
-  });
-</script>

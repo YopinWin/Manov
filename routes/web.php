@@ -29,19 +29,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route untuk Fitur Energy Flow (Update & Delete)
+// 4. Route untuk Fitur Energy Flow (Store, Update & Delete)
 Route::middleware('auth')->group(function () {
-    // Route untuk simpan jadwal baru
     Route::post('/energy/store', [HealthSyncController::class, 'store'])->name('energy.store');
-    
-    // Route yang sudah ada sebelumnya
     Route::patch('/energy/update/{id}', [HealthSyncController::class, 'update'])->name('energy.update');
     Route::delete('/energy/delete/{id}', [HealthSyncController::class, 'destroy'])->name('energy.destroy');
 });
 
+// 5. Route untuk Academic Stats & Data Maintenance
+Route::middleware('auth')->group(function () {
+    Route::post('/academic/store', [HealthSyncController::class, 'storeAcademic'])->name('academic.store');
+    Route::get('/academic/data', [HealthSyncController::class, 'getAcademicData'])->name('academic.data');
+    Route::post('/system/force-recap', [HealthSyncController::class, 'forceRecap'])->name('system.recap');
+});
+
+// 6. About (public)
 Route::get('/about', function () {
     return view('sync-features.about');
 });
 
-// 4. SISTEM AUTH (Login, Register, Logout, dll)
+// 7. SISTEM AUTH (Login, Register, Logout, dll)
 require __DIR__.'/auth.php';

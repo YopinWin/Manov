@@ -1,4 +1,4 @@
-<div class="max-w-3xl bg-white rounded-[2.5rem] p-10 shadow-sm border border-pink-100 mx-auto">
+<div class="max-w-3xl glass-card p-10 mx-auto">
     <h3 class="text-2xl font-bold mb-10 text-center uppercase tracking-tight">
         Mood-Check AI <span id="mood-robot">🤖</span>
     </h3>
@@ -29,7 +29,7 @@
         </button>
     </div>
 
-    <div id="resultBox" class="p-8 bg-gradient-to-br from-white to-pink-50 rounded-[2.5rem] border border-pink-100 shadow-inner min-h-[180px] transition-all duration-500 relative">
+    <div id="resultBox" class="p-8 glass-panel rounded-[2.5rem] min-h-[180px] transition-all duration-500 relative">
         <div id="realResult" class="animate-fadeIn">
             <p class="text-[10px] font-black text-pink-500 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-wand-magic-sparkles"></i> AI Status Analysis

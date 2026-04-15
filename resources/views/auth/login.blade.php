@@ -157,6 +157,17 @@
     <h2>HTS</h2>
     <p class="subtitle">Log in to sync your life</p>
 
+    @if ($errors->any())
+        <div style="background: #FFF0F2; color: #E11D48; border: 1px solid #FFE4E6; padding: 12px 15px; border-radius: 12px; margin-bottom: 20px; font-size: 12px; text-align: left; animation: fadeIn 0.4s ease-out;">
+            <div style="font-weight: 800; margin-bottom: 4px;"><i class="fa-solid fa-triangle-exclamation"></i> Gagal Login</div>
+            <ul style="padding-left: 15px; list-style-type: disc;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
